@@ -7,12 +7,21 @@ public class Exchange {
 
     private static int idCounter = 0;
     private final Map<String, Integer> priceMap;
+    private final Map<String, Boolean> firstMap;
     private final PrintWriter to_exchange;
 
     public Exchange(PrintWriter to_exchange){
         this.to_exchange = to_exchange;
         priceMap = new HashMap<>(7);
         priceMap.put("BOND", 1000);
+        firstMap = new HashMap<>(7);
+        firstMap.put("BOND", true);
+        firstMap.put("VALBZ", false);
+        firstMap.put("VALE", false);
+        firstMap.put("GS", false);
+        firstMap.put("MS", false);
+        firstMap.put("WFC", false);
+        firstMap.put("XLF", false);
     }
 
     public void addBuy(String symb, int price, int size) {
@@ -38,6 +47,10 @@ public class Exchange {
             int price = Integer.parseInt(message[2]);
             // int size = Integer.parseInt(message[3]);
             priceMap.put(symbol, price);
+            if (!firstMap.get(symbol)) {
+                firstMap.put(symbol, true);
+                addBuy(symbol, priceMap.get(symbol) - 1, 1);
+            }
             System.out.printf("Updated %s to %d%n", symbol, price);
         } else if (message[0].equals("FILL")) {
             System.out.println(Arrays.deepToString(message));
