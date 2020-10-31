@@ -29,6 +29,7 @@ public class Bot {
                 keepGoing = exchange.parse(message);
                 if (!keepGoing) {
                     to_exchange.println(("HELLO " + config.team_name).toUpperCase());
+                    exchange = new Exchange(to_exchange);
                     Thread.sleep(1000);
                 }
             }
