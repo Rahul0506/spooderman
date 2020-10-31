@@ -119,11 +119,13 @@ public class Exchange {
             }
 
             // Check buy/sell
-            if (valbzAve - valeAve > 5) {   // buy vale
-                addBuy("VALE", Math.round(valeAve), 1);
-            } else if (valeAve - valbzAve > 5) {    // sell vale
-                if (valHeld > 0) {
-                    addSell("VALE", Math.round(valeAve), valHeld);
+            if (symbol.equals("VALE") || symbol.equals("VALBZ")) {
+                if (valbzAve - valeAve > 5) {   // buy vale
+                    addBuy("VALE", Math.round(valeAve), 1);
+                } else if (valeAve - valbzAve > 5) {    // sell vale
+                    if (valHeld > 0) {
+                        addSell("VALE", Math.round(valeAve), valHeld);
+                    }
                 }
             }
             // ETF
