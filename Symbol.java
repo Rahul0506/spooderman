@@ -2,9 +2,13 @@ public interface Symbol {
 
     void reset();
 
-    boolean update(int price);
+    Trade update(int price);
 
     boolean favourBuy();
 
     boolean favourSell();
+
+    String[] genBuy();
+
+    String[] genSell();
 }

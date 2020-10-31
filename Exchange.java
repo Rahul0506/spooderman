@@ -15,6 +15,8 @@ public class Exchange {
     public Exchange(PrintWriter to_exchange){
         this.to_exchange = to_exchange;
         symbolMap = new HashMap<>(7);
+        symbolMap.put("BOND", new Bond());
+
         priceMap = new HashMap<>(7);
         priceMap.put("BOND", 1000);
         firstMap = new HashMap<>(7);
@@ -44,11 +46,9 @@ public class Exchange {
             // ignore
         } else if (message[0].equals("TRADE")) {
             String symbol = message[1];
-            if (symbol.equals("BOND")) {
-                return true;
-            }
             int price = Integer.parseInt(message[2]);
             // int size = Integer.parseInt(message[3]);
+
             priceMap.put(symbol, price);
             if (!firstMap.get(symbol)) {
                 firstMap.put(symbol, true);
