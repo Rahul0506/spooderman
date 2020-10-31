@@ -130,9 +130,9 @@ public class Exchange {
             }
             // ETF
             else if (symbol.equals("XLF")) {
-                if (etfEstimate - price > 10) {
+                if (etfEstimate - price > 10 && etfHeld < 50) {
                     addBuy("XLF", price, 1);
-                } else if (price - etfEstimate > 5) {
+                } else if (price - etfEstimate > 3) {
                     if (etfHeld > 0) {
                         addSell("XLF", price, etfHeld);
                     }
