@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Bot {
     public static void main(String[] args) {
-        Configuration config = new Configuration(true);
+        Configuration config = new Configuration(false);
         try
         {
             Socket skt = new Socket(config.exchange_name(), config.port());
@@ -33,7 +33,7 @@ public class Bot {
     static class Configuration {
         String exchange_name;
         int    exchange_port;
-        final Integer test_exchange_kind = 1;
+        final Integer test_exchange_kind = 0;
         final String  team_name          = "SPOODERMAN";
 
         Configuration(Boolean test_mode) {

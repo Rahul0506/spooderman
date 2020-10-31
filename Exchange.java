@@ -18,11 +18,13 @@ public class Exchange {
 
     public void addBuy(String symb, int price, int size) {
         idCounter += 1;
+        System.out.println(String.format("ADD %d %s BUY %d %d\n", idCounter, symb, price, size));
         to_exchange.print(String.format("ADD %d %s BUY %d %d\n", idCounter, symb, price, size));
     }
 
     public void addSell(String symb, int price, int size) {
         idCounter += 1;
+        System.out.println(String.format("ADD %d %s SELL %d %d\n", idCounter, symb, price, size));
         to_exchange.print(String.format("ADD %d %s SELL %d %d\n", idCounter, symb, price, size));
     }
 
