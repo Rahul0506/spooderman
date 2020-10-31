@@ -32,7 +32,7 @@ public class Bot {
     static class Configuration {
         String exchange_name;
         int    exchange_port;
-        final Integer test_exchange_kind = 0;
+        final Integer test_exchange_kind = 1;
         final String  team_name          = "SPOODERMAN";
 
         Configuration(Boolean test_mode) {
