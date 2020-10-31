@@ -19,7 +19,7 @@ public class Bot {
 
             boolean keepGoing = true;
             boolean sentFirst = false;
-            while (keepGoing) {
+            while (true) {
                 String[] message = from_exchange.readLine().trim().split(" ");
 
                 if (!sentFirst) {
@@ -27,6 +27,10 @@ public class Bot {
                     sentFirst = true;
                 }
                 keepGoing = exchange.parse(message);
+                if (!keepGoing) {
+                    to_exchange.println(("HELLO " + config.team_name).toUpperCase());
+                    Thread.sleep(1000);
+                }
             }
         }
         catch (Exception e)
