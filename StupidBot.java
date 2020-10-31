@@ -25,7 +25,8 @@ public class StupidBot {
             String reply = from_exchange.readLine().trim();
             System.err.printf("The exchange replied: %s\n", reply);
             while (true) {
-                String message[] = from_exchange.readLine().trim().split(" ");
+                String[] message = from_exchange.readLine().trim().split(" ");
+                System.out.println(message);
                 if (message[0].equals("CLOSE")) {
                     System.out.println("The round has ended");
                     break;
