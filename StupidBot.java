@@ -31,13 +31,14 @@ public class StupidBot {
                 String[] message = from_exchange.readLine().trim().split(" ");
 
                 System.out.println(Arrays.deepToString(message));
-                if (buy) {
-                    to_exchange.println(Exchange.buyBOND());
-                    Thread.sleep(100);
-                } else {
-                    to_exchange.println(Exchange.sellBOND());
-                    Thread.sleep(100);
+                if (message[0].equals("FILL")) {
+                    if (buy) {
+                        to_exchange.println(Exchange.buyBOND());
+                    } else {
+                        to_exchange.println(Exchange.sellBOND());
+                    }
                 }
+
                 buy = !buy;
 
                 if (message[0].equals("CLOSE")) {
