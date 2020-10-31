@@ -1,4 +1,5 @@
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,6 +54,8 @@ public class Exchange {
         } else if (message[0].equals("CLOSE")) {
             System.out.println("Market closed");
             return false;
+        } else if (message[0].equals("HELLO")) {
+            System.out.println(Arrays.deepToString(message));
         }
         return true;
     }
