@@ -41,6 +41,9 @@ public class StupidBot {
                 if (message[0].equals("CLOSE")) {
                     System.out.println("The round has ended");
                     break;
+                } else if (message[0].equals("REJECT")) {
+                    System.out.println("Rejected");
+                    break;
                 }
             }
         }
