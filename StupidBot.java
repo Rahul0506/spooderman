@@ -33,10 +33,10 @@ public class StupidBot {
                 System.out.println(Arrays.deepToString(message));
                 if (buy) {
                     to_exchange.println(Exchange.buyBOND());
-                    Thread.sleep(5);
+                    Thread.sleep(100);
                 } else {
                     to_exchange.println(Exchange.sellBOND());
-                    Thread.sleep(5);
+                    Thread.sleep(100);
                 }
                 buy = !buy;
 
