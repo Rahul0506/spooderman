@@ -92,7 +92,7 @@ public class Exchange {
             }
 
             // Check buy/sell
-            if (valbzAve - valeAve > 8) {   // buy vale
+            if (valbzAve - valeAve > 10) {   // buy vale
                 addBuy("VALE", Math.round(valeAve), 1);
             } else if (valeAve - valbzAve > 5) {    // sell vale
                 if (valHeld > 0) {
@@ -101,7 +101,7 @@ public class Exchange {
             }
             // ETF
             else if (symbol.equals("XLF")) {
-                if (etfEstimate - price > 8) {
+                if (etfEstimate - price > 15) {
                     addBuy("XLF", price, 1);
                 } else if (price - etfEstimate > 5) {
                     if (etfHeld > 0) {
