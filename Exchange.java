@@ -92,7 +92,7 @@ public class Exchange {
             }
 
             // Check buy/sell
-            if (valbzAve - valeAve > 10) {   // buy vale
+            if (valbzAve - valeAve > 8) {   // buy vale
                 addBuy("VALE", Math.round(valeAve), 1);
             } else if (valeAve - valbzAve > 5) {    // sell vale
                 if (valHeld > 0) {
@@ -132,7 +132,7 @@ public class Exchange {
                     valHeld += Integer.parseInt(message[5]);
                 } else if (symbol.equals("XLF")) {
                     etfHeld += Integer.parseInt(message[5]);
-                } else {
+                } else if (symbol.equals("BOND")) {
                     addSell(symbol, priceMap.get(symbol) + 1, 1);
                 }
             } else {
@@ -140,7 +140,7 @@ public class Exchange {
                     valHeld -= Integer.parseInt(message[5]);
                 } else if (symbol.equals("XLF")) {
                     etfHeld -= Integer.parseInt(message[5]);
-                } else {
+                } else if (symbol.equals("BOND")) {
                     addBuy(symbol, priceMap.get(symbol) - 1, 1);
                 }
             }
