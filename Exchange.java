@@ -81,15 +81,16 @@ public class Exchange {
                 if (valHeld > 0) {
                     addSell("VALE", Math.round(valeAve), valHeld);
                 }
-            }
+            } else {
 
-//            // Legacy
-//            priceMap.put(symbol, price);
-//            if (!firstMap.get(symbol)) {
-//                firstMap.put(symbol, true);
-//                addBuy(symbol, priceMap.get(symbol) - 1, 1);
-//            }
-//            System.out.printf("Updated %s to %d%n", symbol, price);
+                // Legacy
+                priceMap.put(symbol, price);
+                if (!firstMap.get(symbol)) {
+                    firstMap.put(symbol, true);
+                    addBuy(symbol, priceMap.get(symbol) - 1, 1);
+                }
+            }
+            System.out.printf("Updated %s to %d%n", symbol, price);
         } else if (message[0].equals("FILL")) {
 
             System.out.println(Arrays.deepToString(message));
@@ -102,10 +103,14 @@ public class Exchange {
             if (message[3].equals("BUY")) {
                 if (symbol.equals("VALE")) {
                     valHeld += Integer.parseInt(message[5]);
+                } else {
+                    addSell(symbol, priceMap.get(symbol) + 1, 1);
                 }
             } else {
                 if (symbol.equals("VALE")) {
                     valHeld -= Integer.parseInt(message[5]);
+                } else {
+                    addBuy(symbol, priceMap.get(symbol) - 1, 1);
                 }
             }
 
