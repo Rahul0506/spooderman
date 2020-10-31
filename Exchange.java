@@ -8,10 +8,13 @@ public class Exchange {
     private static int idCounter = 0;
     private final Map<String, Integer> priceMap;
     private final Map<String, Boolean> firstMap;
+
+    private final Map<String, Symbol> symbolMap;
     private final PrintWriter to_exchange;
 
     public Exchange(PrintWriter to_exchange){
         this.to_exchange = to_exchange;
+        symbolMap = new HashMap<>(7);
         priceMap = new HashMap<>(7);
         priceMap.put("BOND", 1000);
         firstMap = new HashMap<>(7);

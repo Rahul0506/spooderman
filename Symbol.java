@@ -2,5 +2,9 @@ public interface Symbol {
 
     void reset();
 
-    void update(int price);
+    boolean update(int price);
+
+    boolean favourBuy();
+
+    boolean favourSell();
 }
