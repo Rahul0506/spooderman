@@ -16,7 +16,7 @@ public class Bot {
             to_exchange.println(("HELLO " + config.team_name).toUpperCase());
 
             Exchange exchange = new Exchange(to_exchange);
-            exchange.addBuy("BOND", 999, 1);
+            exchange.addBuy("BOND", 1000, 1);
             boolean keepGoing = true;
             while (keepGoing) {
                 String[] message = from_exchange.readLine().trim().split(" ");
