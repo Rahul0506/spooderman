@@ -46,7 +46,7 @@ class Configuration {
        1 = slow
        2 = empty
     */
-    final Integer test_exchange_kind = 2;
+    final Integer test_exchange_kind = 1;
     /* replace REPLACEME with your team name! */
     final String  team_name          = "SPOODERMAN";
 
