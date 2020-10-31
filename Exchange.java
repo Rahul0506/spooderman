@@ -148,7 +148,9 @@ public class Exchange {
                 } else if (symbol.equals("XLF")) {
                     etfHeld += Integer.parseInt(message[5]);
                 } else if (symbol.equals("BOND")) {
-                    addSell(symbol, priceMap.get(symbol) + 1, 1);
+                    addSell(symbol, 1001, 1);
+                } else if (symbol.equals("MS")) {
+                    msHeld += Integer.parseInt(message[5]);
                 }
             } else {
                 if (symbol.equals("VALE")) {
@@ -156,7 +158,7 @@ public class Exchange {
                 } else if (symbol.equals("XLF")) {
                     etfHeld -= Integer.parseInt(message[5]);
                 } else if (symbol.equals("BOND")) {
-                    addBuy(symbol, priceMap.get(symbol) - 1, 1);
+                    addBuy(symbol, 999, 1);
                 } else if (symbol.equals("MS")){
                     msHeld -= Integer.parseInt(message[5]);
                 }
