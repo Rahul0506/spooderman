@@ -141,11 +141,7 @@ public class Exchange {
 
             System.out.println(Arrays.deepToString(message));
             String symbol = message[2];
-//            if (message[3].equals("BUY")) {
-//                addSell(symbol, priceMap.get(symbol) + 1, 1);
-//            } else {
-//                addBuy(symbol, priceMap.get(symbol) - 1, 1);
-//            }
+
             if (message[3].equals("BUY")) {
                 if (symbol.equals("VALE")) {
                     valHeld += Integer.parseInt(message[5]);
