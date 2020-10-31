@@ -14,7 +14,6 @@ public class Exchange {
         this.to_exchange = to_exchange;
         priceMap = new HashMap<>(7);
         priceMap.put("BOND", 1000);
-        addBuy("BOND", 999, 1);
     }
 
     public void addBuy(String symb, int price, int size) {
