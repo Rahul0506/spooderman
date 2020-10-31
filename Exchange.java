@@ -122,7 +122,7 @@ public class Exchange {
             if (symbol.equals("VALE") || symbol.equals("VALBZ")) {
                 if (valbzAve - valeAve > 5) {   // buy vale
                     addBuy("VALE", Math.round(valeAve), 1);
-                } else if (valeAve - valbzAve > 5) {    // sell vale
+                } else if (valeAve - valbzAve > 3) {    // sell vale
                     if (valHeld > 0) {
                         addSell("VALE", Math.round(valeAve), valHeld);
                     }
@@ -130,7 +130,7 @@ public class Exchange {
             }
             // ETF
             else if (symbol.equals("XLF")) {
-                if (etfEstimate - price > 10 && etfHeld < 50) {
+                if (etfEstimate - price > 8 && etfHeld < 50) {
                     addBuy("XLF", price, 1);
                 } else if (price - etfEstimate > 3) {
                     if (etfHeld > 0) {
