@@ -16,11 +16,17 @@ public class Bot {
             to_exchange.println(("HELLO " + config.team_name).toUpperCase());
 
             Exchange exchange = new Exchange(to_exchange);
-            exchange.addBuy("BOND", 1000, 1);
+
             boolean keepGoing = true;
+            boolean sentFirst = false;
             while (keepGoing) {
                 String[] message = from_exchange.readLine().trim().split(" ");
                 System.out.println(Arrays.deepToString(message));
+
+                if (!sentFirst) {
+                    exchange.addBuy("BOND", 1000, 1);
+                    sentFirst = true;
+                }
                 keepGoing = exchange.parse(message);
             }
         }
