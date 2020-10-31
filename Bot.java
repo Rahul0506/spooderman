@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Bot {
     public static void main(String[] args) {
-        Configuration config = new Configuration(true);
+        Configuration config = new Configuration(false);
         try
         {
             Socket skt = new Socket(config.exchange_name(), config.port());
