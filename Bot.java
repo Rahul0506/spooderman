@@ -21,7 +21,6 @@ public class Bot {
             boolean sentFirst = false;
             while (keepGoing) {
                 String[] message = from_exchange.readLine().trim().split(" ");
-                System.out.println(Arrays.deepToString(message));
 
                 if (!sentFirst) {
                     exchange.addBuy("BOND", 1000, 1);
