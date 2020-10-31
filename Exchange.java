@@ -22,6 +22,10 @@ public class Exchange {
     private int valeAve = 0;
     private int valHeld = 0;
 
+    private int[] etfBasket = new int[3];
+    private int etfEstimate = 3000;
+    private int etfHeld = 0;
+
     public Exchange(PrintWriter to_exchange){
         this.to_exchange = to_exchange;
         symbolMap = new HashMap<>(7);
@@ -59,19 +63,32 @@ public class Exchange {
             String symbol = message[1];
             int price = Integer.parseInt(message[2]);
 
-            // Update averages
+            // Update averages - arbitrage
             if (symbol.equals("VALBZ")) {
                 valbzAve -= valbzPrice[valbzIndex] / 20;
                 valbzAve += price / 20;
                 valbzPrice[valbzIndex] = price;
                 valbzIndex = (valbzIndex + 1) % 20;
-            }
-
-            if (symbol.equals("VALE")) {
+            } else if (symbol.equals("VALE")) {
                 valeAve -= valePrice[valeIndex] / 5;
                 valeAve += price / 5;
                 valePrice[valeIndex] = price;
                 valeIndex = (valeIndex + 1) % 5;
+            }
+
+            // Update basket
+            else if (symbol.equals("GS")) {
+                etfEstimate -= etfBasket[0] * 2;
+                etfEstimate += price * 2;
+                etfBasket[0] = price;
+            } else if (symbol.equals("MS")) {
+                etfEstimate -= etfBasket[1] * 3;
+                etfEstimate += price * 3;
+                etfBasket[1] = price;
+            } else if (symbol.equals("WFC")) {
+                etfEstimate -= etfBasket[2] * 2;
+                etfEstimate += price * 2;
+                etfBasket[2] = price;
             }
 
             // Check buy/sell
@@ -80,6 +97,16 @@ public class Exchange {
             } else if (valeAve - valbzAve > 5) {    // sell vale
                 if (valHeld > 0) {
                     addSell("VALE", Math.round(valeAve), valHeld);
+                }
+            }
+            // ETF
+            else if (symbol.equals("XLF")) {
+                if (etfEstimate - price > 5) {
+                    addBuy("XLF", price, 1);
+                } else if (price - etfEstimate > 5) {
+                    if (etfHeld > 0) {
+                        addSell("XLF", price, etfHeld);
+                    }
                 }
             } else {
 
@@ -103,12 +130,16 @@ public class Exchange {
             if (message[3].equals("BUY")) {
                 if (symbol.equals("VALE")) {
                     valHeld += Integer.parseInt(message[5]);
+                } else if (symbol.equals("XLF")) {
+                    etfHeld += Integer.parseInt(message[5]);
                 } else {
                     addSell(symbol, priceMap.get(symbol) + 1, 1);
                 }
             } else {
                 if (symbol.equals("VALE")) {
                     valHeld -= Integer.parseInt(message[5]);
+                } else if (symbol.equals("XLF")) {
+                    etfHeld -= Integer.parseInt(message[5]);
                 } else {
                     addBuy(symbol, priceMap.get(symbol) - 1, 1);
                 }
