@@ -26,7 +26,8 @@ public class StupidBot {
             String reply = from_exchange.readLine().trim();
             System.err.printf("The exchange replied: %s\n", reply);
 
-            boolean buy = true;
+            to_exchange.println(Exchange.buyBOND());
+            boolean buy = false;
             while (true) {
                 String[] message = from_exchange.readLine().trim().split(" ");
 
