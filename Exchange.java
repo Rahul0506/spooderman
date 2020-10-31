@@ -108,16 +108,8 @@ public class Exchange {
                         addSell("XLF", price, etfHeld);
                     }
                 }
-            } else {
-
-                // Legacy
-                priceMap.put(symbol, price);
-                if (!firstMap.get(symbol)) {
-                    firstMap.put(symbol, true);
-                    addBuy(symbol, priceMap.get(symbol) - 1, 1);
-                }
             }
-            System.out.printf("Updated %s to %d%n", symbol, price);
+
         } else if (message[0].equals("FILL")) {
 
             System.out.println(Arrays.deepToString(message));
