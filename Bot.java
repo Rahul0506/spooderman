@@ -14,8 +14,6 @@ public class Bot {
             PrintWriter to_exchange = new PrintWriter(skt.getOutputStream(), true);
 
             to_exchange.println(("HELLO " + config.team_name).toUpperCase());
-            String reply = from_exchange.readLine().trim();
-            System.err.printf("The exchange replied: %s\n", reply);
 
             Exchange exchange = new Exchange(to_exchange);
             boolean keepGoing = true;
