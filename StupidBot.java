@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class StupidBot {
     public static void main(String[] args)
@@ -26,7 +27,7 @@ public class StupidBot {
             System.err.printf("The exchange replied: %s\n", reply);
             while (true) {
                 String[] message = from_exchange.readLine().trim().split(" ");
-                System.out.println(message);
+                System.out.println(Arrays.deepToString(message));
                 if (message[0].equals("CLOSE")) {
                     System.out.println("The round has ended");
                     break;
