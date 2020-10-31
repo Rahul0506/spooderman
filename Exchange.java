@@ -23,7 +23,7 @@ public class Exchange {
     private int valHeld = 0;
 
     private int[] etfBasket = new int[3];
-    private int etfEstimate = 3000;
+    private int etfEstimate = 300;
     private int etfHeld = 0;
 
     public Exchange(PrintWriter to_exchange){
@@ -78,16 +78,16 @@ public class Exchange {
 
             // Update basket
             else if (symbol.equals("GS")) {
-                etfEstimate -= etfBasket[0] * 2;
-                etfEstimate += price * 2;
+                etfEstimate -= etfBasket[0] * 2 / 10;
+                etfEstimate += price * 2 / 10;
                 etfBasket[0] = price;
             } else if (symbol.equals("MS")) {
-                etfEstimate -= etfBasket[1] * 3;
-                etfEstimate += price * 3;
+                etfEstimate -= etfBasket[1] * 3 / 10;
+                etfEstimate += price * 3 / 10;
                 etfBasket[1] = price;
             } else if (symbol.equals("WFC")) {
-                etfEstimate -= etfBasket[2] * 2;
-                etfEstimate += price * 2;
+                etfEstimate -= etfBasket[2] * 2 / 10;
+                etfEstimate += price * 2 / 10;
                 etfBasket[2] = price;
             }
 
