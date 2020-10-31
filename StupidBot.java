@@ -25,9 +25,19 @@ public class StupidBot {
             to_exchange.println(("HELLO " + config.team_name).toUpperCase());
             String reply = from_exchange.readLine().trim();
             System.err.printf("The exchange replied: %s\n", reply);
+
+            boolean buy = true;
             while (true) {
                 String[] message = from_exchange.readLine().trim().split(" ");
+
                 System.out.println(Arrays.deepToString(message));
+                if (buy) {
+                    to_exchange.println(Exchange.buyBOND());
+                } else {
+                    to_exchange.println(Exchange.sellBOND());
+                }
+                buy = !buy;
+
                 if (message[0].equals("CLOSE")) {
                     System.out.println("The round has ended");
                     break;
