@@ -43,9 +43,9 @@ public class Exchange {
             System.out.println(Arrays.deepToString(message));
             String symbol = message[2];
             if (message[3].equals("BUY")) {
-                addSell(symbol, priceMap.get(symbol) - 1, 1);
+                addSell(symbol, priceMap.get(symbol) + 1, 1);
             } else {
-                addBuy(symbol, priceMap.get(symbol) + 1, 1);
+                addBuy(symbol, priceMap.get(symbol) - 1, 1);
             }
         } else if (message[0].equals("REJECT")) {
             idCounter -= 1;
