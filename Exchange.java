@@ -7,10 +7,20 @@ public class Exchange {
 
     private static int idCounter = 0;
     private final Map<String, Integer> priceMap;
+
     private final Map<String, Boolean> firstMap;
 
     private final Map<String, Symbol> symbolMap;
     private final PrintWriter to_exchange;
+
+    private int[] valbzPrice = new int[20];
+    private int valbzIndex = 0;
+    private int valbzAve = 0;
+
+    private int[] valePrice = new int[5];
+    private int valeIndex = 0;
+    private int valeAve = 0;
+    private int valHeld = 0;
 
     public Exchange(PrintWriter to_exchange){
         this.to_exchange = to_exchange;
@@ -45,24 +55,60 @@ public class Exchange {
         if (message[0].equals("BOOK")){
             // ignore
         } else if (message[0].equals("TRADE")) {
+
             String symbol = message[1];
             int price = Integer.parseInt(message[2]);
-            // int size = Integer.parseInt(message[3]);
 
-            priceMap.put(symbol, price);
-            if (!firstMap.get(symbol)) {
-                firstMap.put(symbol, true);
-                addBuy(symbol, priceMap.get(symbol) - 1, 1);
+            // Update averages
+            if (symbol.equals("VALBZ")) {
+                valbzAve -= valbzPrice[valbzIndex] / 20;
+                valbzAve += price / 20;
+                valbzPrice[valbzIndex] = price;
+                valbzIndex = (valbzIndex + 1) % 20;
             }
-            System.out.printf("Updated %s to %d%n", symbol, price);
+
+            if (symbol.equals("VALE")) {
+                valeAve -= valePrice[valeIndex] / 5;
+                valeAve += price / 5;
+                valePrice[valeIndex] = price;
+                valeIndex = (valeIndex + 1) % 5;
+            }
+
+            // Check buy/sell
+            if (valbzAve - valeAve > 5) {   // buy vale
+                addBuy("VALE", Math.round(valeAve), 1);
+            } else if (valeAve - valbzAve > 5) {    // sell vale
+                if (valHeld > 0) {
+                    addSell("VALE", Math.round(valeAve), valHeld);
+                }
+            }
+
+//            // Legacy
+//            priceMap.put(symbol, price);
+//            if (!firstMap.get(symbol)) {
+//                firstMap.put(symbol, true);
+//                addBuy(symbol, priceMap.get(symbol) - 1, 1);
+//            }
+//            System.out.printf("Updated %s to %d%n", symbol, price);
         } else if (message[0].equals("FILL")) {
+
             System.out.println(Arrays.deepToString(message));
             String symbol = message[2];
+//            if (message[3].equals("BUY")) {
+//                addSell(symbol, priceMap.get(symbol) + 1, 1);
+//            } else {
+//                addBuy(symbol, priceMap.get(symbol) - 1, 1);
+//            }
             if (message[3].equals("BUY")) {
-                addSell(symbol, priceMap.get(symbol) + 1, 1);
+                if (symbol.equals("VALE")) {
+                    valHeld += Integer.parseInt(message[5]);
+                }
             } else {
-                addBuy(symbol, priceMap.get(symbol) - 1, 1);
+                if (symbol.equals("VALE")) {
+                    valHeld -= Integer.parseInt(message[5]);
+                }
             }
+
         } else if (message[0].equals("REJECT")) {
             idCounter -= 1;
         } else if (message[0].equals("CLOSE")) {
