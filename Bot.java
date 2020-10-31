@@ -20,6 +20,7 @@ public class Bot {
             boolean keepGoing = true;
             while (keepGoing) {
                 String[] message = from_exchange.readLine().trim().split(" ");
+                System.out.println(Arrays.deepToString(message));
                 keepGoing = exchange.parse(message);
             }
         }
